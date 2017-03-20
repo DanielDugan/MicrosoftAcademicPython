@@ -1,4 +1,4 @@
-import httplib, urllib, base64
+import httplib, urllib, base64, json
 
 headers = {
     # Request headers
@@ -21,6 +21,9 @@ try:
     response = conn.getresponse()
     data = response.read()
     print(data)
+    with open('data.txt', 'w') as outfile:
+        json.dump(data, outfile, sort_keys = True, indent = 4, ensure_ascii = False)
     conn.close()
+    
 except Exception as e:
     print("[Errno {0}] {1}".format(e.errno, e.strerror))
